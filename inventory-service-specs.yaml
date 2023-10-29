@@ -1,0 +1,631 @@
+openapi: 3.0.3
+info:
+  title: InventoryApp
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/v1/auth/register:
+    post:
+      tags:
+        - default
+      summary: Register a new user
+      requestBody:
+        description: Register a new user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationRequest'
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid request
+  /api/v1/auth/signin:
+    post:
+      tags:
+        - default
+      summary: User signin. Authenticates user and returns jwt token corresponing to given user scopes.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInRequest'
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Signin success. Returns token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignInResponse'
+        '400':
+          description: Invalid request
+        '401':
+          description: Invalid credentials
+  /api/v1/skuData:
+    get:
+      tags:
+        - default
+      summary: Get SkuData with given metadata properties
+      security:
+        - bearerAuth: [USER]
+      parameters:
+        - name: locationId
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: departmentId
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: categoryId
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: subCategoryId
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+    post:
+      tags:
+        - default
+      summary: Add new SkuData with given metadata properties
+      security:
+        - bearerAuth: [ADMIN]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SkuData'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+    delete:
+      tags:
+        - default
+      summary: Delete SkuData
+      security:
+        - bearerAuth: [ADMIN]
+      parameters:
+        - name: sku
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Successfully deleted. No content.
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+        '404':
+          description: Skudata not found with given details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+    
+  /api/v1/location:
+    get:
+      tags:
+        - default
+      summary: Returns all locations from metadata.
+      security:
+        - bearerAuth: [USER]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+        '404':
+          description: NO locations found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+    post:
+      tags:
+        - default
+      summary: Add new Location
+      requestBody:
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+      security:
+        - bearerAuth: [ADMIN]
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+    put:
+      tags:
+        - default
+      summary: Update Location
+      requestBody:
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+      security:
+        - bearerAuth: [ADMIN]
+      responses:
+        '204':
+          description: Updated
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation
+        '404':
+          description: Location not found with given data
+    delete:
+      tags:
+        - default
+      summary: Delete Location
+      security:
+        - bearerAuth: [ADMIN]
+      parameters:
+        - name: locationId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation
+        '404':
+          description: Location not found with given data
+  /api/v1/location/{location_id}/department:
+    get:
+      summary: Get all departments with given location
+      parameters:
+        - in: path
+          name: location_id
+          schema:
+            type: string
+          required: true
+          description: Location to filter
+      security:
+        - bearerAuth: [USER]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+        '404':
+          description: NO departments found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+  /api/v1/location/{location_id}/department/{department_id}/category:
+    get:
+      summary: Get all categories with given location and department
+      parameters:
+        - in: path
+          name: location_id
+          schema:
+            type: string
+          required: true
+          description: Location to filter
+        - in: path
+          name: department_id
+          schema:
+            type: string
+          required: true
+          description: Department to filter
+      security:
+        - bearerAuth: [USER]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+        '404':
+          description: NO categories found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+  /api/v1/location/{location_id}/department/{department_id}/category/{category_id}/subcategory:
+    get:
+      summary: Get all sub-categories with given location, department and category
+      parameters:
+        - in: path
+          name: location_id
+          schema:
+            type: string
+          required: true
+          description: Location to filter
+        - in: path
+          name: department_id
+          schema:
+            type: string
+          required: true
+          description: Department to filter
+        - in: path
+          name: category_id
+          schema:
+            type: string
+          required: true
+          description: Category to filter
+      security:
+        - bearerAuth: [USER]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+        '404':
+          description: NO sub-categories found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+  /api/v1/location/{location_id}/department/{department_id}/category/{category_id}/subcategory/{subcategory_id}:
+    get:
+      summary: Get metadata with given details
+      parameters:
+        - in: path
+          name: location_id
+          schema:
+            type: string
+          required: true
+          description: Location to filter
+        - in: path
+          name: department_id
+          schema:
+            type: string
+          required: true
+          description: Department to filter
+        - in: path
+          name: category_id
+          schema:
+            type: string
+          required: true
+          description: Category to filter
+        - in: path
+          name: subcategory_id
+          schema:
+            type: string
+          required: true
+          description: Sub-Category to filter
+      security:
+        - bearerAuth: [USER]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metadata'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+        '404':
+          description: NO metadata found with given details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+    post:
+      summary: Add new metadata with given details
+      parameters:
+        - in: path
+          name: location_id
+          schema:
+            type: string
+          required: true
+          description: Location
+        - in: path
+          name: department_id
+          schema:
+            type: string
+          required: true
+          description: Department
+        - in: path
+          name: category_id
+          schema:
+            type: string
+          required: true
+          description: Category
+        - in: path
+          name: subcategory_id
+          schema:
+            type: string
+          required: true
+          description: Sub-Category
+      security:
+        - bearerAuth: [ADMIN]
+      responses:
+        '201':
+          description: Added new metadata
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+    delete:
+      summary: Delete metadata with given details
+      parameters:
+        - in: path
+          name: location_id
+          schema:
+            type: string
+          required: true
+          description: Location
+        - in: path
+          name: department_id
+          schema:
+            type: string
+          required: true
+          description: Department
+        - in: path
+          name: category_id
+          schema:
+            type: string
+          required: true
+          description: Category
+        - in: path
+          name: subcategory_id
+          schema:
+            type: string
+          required: true
+          description: Sub-Category
+      security:
+        - bearerAuth: [ADMIN]
+      responses:
+        '204':
+          description: Successfully deleted
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+        '401':
+          description: Invalid credentials
+        '403':
+          description: User does not have enough permissions to make this operation.
+        '404':
+          description: NO metadata found with given details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorData'
+components:
+  schemas:
+    UserRegistrationRequest:
+      required: 
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          minLength: 6
+        isAdmin:
+          type: boolean
+          default: false
+    SignInRequest:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+          minLength: 6
+    SignInResponse:
+      required:
+        - token
+      type: object
+      properties:
+        token:
+          type: string
+    Location:
+      required:
+        - locationId
+      type: object
+      properties:
+        locationId:
+          type: string
+        description:
+          type: string
+    Metadata:
+      required:
+        - locationId
+        - departmentId
+        - categoryId
+        - subCategoryId
+      type: object
+      properties:
+        locationId:
+          type: string
+        departmentId:
+          type: string
+        categoryId:
+          type: string
+        subCategoryId:
+          type: string
+    SkuData:
+      allOf:
+        - $ref: '#/components/schemas/Metadata'
+      required:
+        - sku
+        - name
+      type: object
+      properties:
+        sku:
+          type: integer
+          format: int64
+        name:
+          type: string
+    ErrorData:
+      required:
+        - errorMessage
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        additionalErrorData:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

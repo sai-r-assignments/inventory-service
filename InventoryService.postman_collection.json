@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "ed38e463-1ac2-4a01-9312-737fd8592ed2",
+		"name": "InventoryApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30793294"
+	},
+	"item": [
+		{
+			"name": "Register admin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Admin User\",\n    \"email\": \"admin@mail.com\",\n    \"password\": \"admin@123\",\n    \"isAdmin\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Common User\",\n    \"email\": \"user@mail.com\",\n    \"password\": \"user@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Signin user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"email\": \"user@mail.com\",\n    \"password\": \"user@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/auth/signin"
+			},
+			"response": []
+		},
+		{
+			"name": "Signin admin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"admin@mail.com\",\n    \"password\": \"admin@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/auth/signin"
+			},
+			"response": []
+		},
+		{
+			"name": "Get SkuData",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AbWFpbC5jb20iLCJleHAiOjE2OTg1MDIwMjAsImlhdCI6MTY5ODUwMTcyMCwic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9BRE1JTiJ9.ELqQ1BQ-0hPLjnFBBChWVbi19xddKvY6n_wbM1vXDqRgOhbeE2zvC3t0DcbKIUnmdxwAomRF9iP_U_vrchLLeI869ZO9W83fmralXgzCRhyGOJLfhGUBKVU30_hEXBS01YCou-NulY3Uu17XEl44GvcpWNCQSOVtNpRZ9-e9UfvPDItI-Ymm9QuLqfXei7Rl2RMZVMKWh_J7tnfcNIr8C7g0-9vrGU4gj0yYIf-P5yCiwCnGg2RDb-8nzBvuKRNPcOip1POoUbFXXSH4irUIJ6z-WWHNVVBoqdtioIt6xepVXoqbpPbTuKZ_unj6dsYWsknmY_wYl5-YpKEBqIRlTxcVIapDx2TmVC_VhrlY36HvwF38Kx-6LdbcqXYv_uQH36OlYs6e2FpGvgoUoMRM1IaLiW1rUlDBLjlV1ncA8A_ptD0vHjIyOLqVpbv_9GE6r3H-w53Culnu4UEEBl8poMnOjBsE0ytclwyRsPvqcEUxaukDlkN68yqArggozxeESYHiSDyigpHEoXgxCb_OJeGp_ULGX1xEdWCjEyVVc1Q96RZKwRW5Y0a-buMRzGA045EqDkye-Z1Z1nSAoHmVUomHBAk-rg8VvRpw4pgzNjzXVWcMRuR4tOFi6RUDV8N9wj7Z3eKbveyeNrISoZD4ZnJSKCDSAmgwvRPxzInhHvU"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/skuData?locationId=Perimeter&departmentId=Bakery&categoryId=Bakery Bread&subCategoryId=Bagels",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"skuData"
+					],
+					"query": [
+						{
+							"key": "locationId",
+							"value": "Perimeter"
+						},
+						{
+							"key": "departmentId",
+							"value": "Bakery"
+						},
+						{
+							"key": "categoryId",
+							"value": "Bakery Bread"
+						},
+						{
+							"key": "subCategoryId",
+							"value": "Bagels"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Locations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlckBtYWlsLmNvbSIsImV4cCI6MTY5ODQxMTI3OSwiaWF0IjoxNjk4NDEwOTc5LCJzY29wZSI6IlJPTEVfVVNFUiJ9.afoIKHud_OUkiLQS8GefpRY1lgsICwIl36NAF2Vk9TvE_nf89xOTIlQ3MB-NBUeesU5jmCsdNZ-bwY-VKbTJndYIP5gfWhl1i2dFB4Ksmc25a689bwuPxOJALe1n3WzTHpZJAgQp4cyAlAxy5wp7VmXRZSpEiZnMB9OwtQbvEKNelhGk85xj0Q9gI_DBaHS6Nu9TiLCRtATfmrH6ZWDjEK51eiG8-EjdZoAoULi94OByKifQjuinA2VdUU6yO2_UAmlpE-AMZsrBRfMJAUYESUzNo_2YOnItivab_YBQdPTmeKh3Lg7jxB9TYJ91d2X190qcxhlihUP6MRVhO3SHCMKcLUH1n-xJaGtOEa_O4WW0DmDr6MOW8V2XNW8nGWYNpZ1uz5pVqmxBmBbcqEwNSYimLR273DSjvFOWU5I9eT-j4sRmGxaoy-jhUlVALQ0hQUqKl9hgq8rtn43W6Xanqy9z2hHL4wunA2G1QMMI1hII9iU5vo6ARIfUbuOlepbJdPGLw4peghNoYn8Y3f69kKlbFQqdjLu0xRSrLMG0Br6tE3IEYxmN7fQhHj4SqnH8rMEJ_zt1eMRMqQrpzAdc6jMoPyxOVvfgEcfmw-mGW745YlqYgMoUnxQKCQh13-hKE6588kn5DWEva4AKQXfMHeK8idFtOvq93pjtnJNB-HE"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/v1/location"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Location",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AbWFpbC5jb20iLCJleHAiOjE2OTg0MTE0MjcsImlhdCI6MTY5ODQxMTEyNywic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9BRE1JTiJ9.Ku895Y5EDENHZh1v7k98NLypUmaWAlNeqZOGjihN6EUsITEnWqHh8S9i7-1U5sP877jGqbTXC-ti3rxdkju1McewVi70tOgoE-AYIXW1XrN4dJ6rVeeWK-XuMKBtl8CVTD9QPKoBXmEFxAuuZQPvs0NARPmc0wljN_sXfLuKKenBj7gRV12ltAKyw-6hd7yOaBBafmzBZQPJKTtqpLf2rRmx4q_E_DD8ClkXo92OBZi96wzMdCPOYW-SMPIaP9ccMoOpe2EOj4NkyQEyULjNiTg63wgZHD_m1gd7GrhKFnZ10mk8_VKxx7YUkM1eeXfbEyQNRqY5ndRJkkNEpAMOcIoog2FzHA6C1W6WD2RRMXkLEEN9VNsdZGqjyBmlQq2S8iBzOfHHicZCRYxkc5B3xIgxlwnv3tp1PLviDeoS95-bWN5gIKEf8CREMpXGyEFz3mthsqKoxhf0R44fBwS7ovsl_JhmFyxUYtrQbwwsyJ1uIGspuAja0QyKdmKRKoFkjy1e70-mvpELzFaC2XQuHZoyt3xBoxytNAdMvCF4Sv2sugLVc_V2rwwaKZz26oyXiO59lhQltvh7y6GL1vr_FYXPgO3LoCev81iZoH8-BXCTg40e1ZAwO65V5iGzG_25CtjcVFl5atc-jdtV9kQQ7XwPmRrO4PD2c8-NFST5118"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"locationId\" : \"NewLoc\",\n    \"description\": \"New Loc Desc\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/location"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Location",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AbWFpbC5jb20iLCJleHAiOjE2OTg0MTE3NTIsImlhdCI6MTY5ODQxMTQ1Miwic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9BRE1JTiJ9.FU7Lcjg1DnU0_PuW1k9Rut0vbOLseFc7l0QTnFsLRpEyEPm6E3e6viPIyG6OjBDqn-Dth2r4iQWn2Ilfdq50GRTOG75jxBNupLecDzdlKlH38Pwq5fU68r7jbDDJ5TtWJjE9Gr6zcaPAEKCFtrFsE5dwHzMLWa05kHfVm0MV6-vAX8f5g9zJGkWwgcXSiZir77upmjCBbWtGMKrvIeQv40xFLbepvX38XmSdeafCUatyCn4Iz07v1ee4MasQxFH1eKgO1Mw19YgdZvnRK0hBA-cD63sb_wCilVcdTaAXfW0-uxmla-zdj0oF8v0qtw_r58Kvvj1EXIZPu765w4SkVSo_zoEd3oKmoC92335eCN_z9RCh7MZm8xuxC9GtlBeqRTy-yRsTACQei-Ave1MbLFCuZlUocyjJZlLxoantC9KByvhZe_QDp2UXPxrZKE9TxzzNx1eG96zbKix9iO-tlZJ00VOYWRIHl1_PvKlD1NUeo46toFv0JceLYXozKFqsSdJui5zyyaaP4EttKVHKjqJh2wp7nOC2lzomPvZ64-7i-EOAtJYlA4cdmxTYmODEgCUZl0ASlt0W5-JqprWA1LRfj3anGnC2ANnwkwSlBZugBCgcbRKjO3MLKnEd0__84m2ifOhh8cPXBFmaVOpJKQH_guSN6DhS3ZG8Tpi_OP8"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"locationId\" : \"NewLoc\",\n    \"description\": \"New Loc Desc Updated\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/location"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Location",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AbWFpbC5jb20iLCJleHAiOjE2OTg0MTE3NTIsImlhdCI6MTY5ODQxMTQ1Miwic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9BRE1JTiJ9.FU7Lcjg1DnU0_PuW1k9Rut0vbOLseFc7l0QTnFsLRpEyEPm6E3e6viPIyG6OjBDqn-Dth2r4iQWn2Ilfdq50GRTOG75jxBNupLecDzdlKlH38Pwq5fU68r7jbDDJ5TtWJjE9Gr6zcaPAEKCFtrFsE5dwHzMLWa05kHfVm0MV6-vAX8f5g9zJGkWwgcXSiZir77upmjCBbWtGMKrvIeQv40xFLbepvX38XmSdeafCUatyCn4Iz07v1ee4MasQxFH1eKgO1Mw19YgdZvnRK0hBA-cD63sb_wCilVcdTaAXfW0-uxmla-zdj0oF8v0qtw_r58Kvvj1EXIZPu765w4SkVSo_zoEd3oKmoC92335eCN_z9RCh7MZm8xuxC9GtlBeqRTy-yRsTACQei-Ave1MbLFCuZlUocyjJZlLxoantC9KByvhZe_QDp2UXPxrZKE9TxzzNx1eG96zbKix9iO-tlZJ00VOYWRIHl1_PvKlD1NUeo46toFv0JceLYXozKFqsSdJui5zyyaaP4EttKVHKjqJh2wp7nOC2lzomPvZ64-7i-EOAtJYlA4cdmxTYmODEgCUZl0ASlt0W5-JqprWA1LRfj3anGnC2ANnwkwSlBZugBCgcbRKjO3MLKnEd0__84m2ifOhh8cPXBFmaVOpJKQH_guSN6DhS3ZG8Tpi_OP8"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/location?locationId=NewLoc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"location"
+					],
+					"query": [
+						{
+							"key": "locationId",
+							"value": "NewLoc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete SkuData",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AbWFpbC5jb20iLCJleHAiOjE2OTg0OTMxMzAsImlhdCI6MTY5ODQ5MjgzMCwic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9BRE1JTiJ9.KZbAJxABpoSHUqVixUOuzN39k8YW2jOmwZ0VAZEET3q2lAFnuNoorfL-3fmGUfp2dLfZA5K-WQ5qfgefusDx8JbV2iRvf8Icmm3L7i0HSVUAss76_MbWWdKeR78H6BQrHcpX42f-6pLHpk9qgcQH9y9GD44DEgPENoJdrIueGGzgWhi0csNRvfa1ZqrUO2TLTH-Aec8rjl5ciAZ5HcNEaWlSCDXpWTkvS-4wCIAARidnS_ng2XK-JM_bICMcwZ_HHdEKwBUxu98cbC8nq5OToKf1gaH7op1yfOxB0DS70WLxFCKLVFXuUS2_IyL3cfNlqjAxp4JZb-KMHE5AthxEJxNw0M2JSljgsOjIqIQl6YLxhC8TXK2ucjQw6Sf60rFs4_aaqO0EiUXIKuGNj1tJ4ukqiYRVwSRBZEhebWg5mrrzyNfUknhk7AwdJpDBY5BtOSVQ7peK75g1A_O36zaXjUAgG03znZgJeCc95xqkFi8OdDx4q6CsK39kFRu4ZCUbmVl0wCZR-7fJoy0Cqdz90gaM9To9GgsybJsHFo-0bJWK2sv4DMyzZmYKddcqiNAidXIsk25ZqOLkVRMuqfGBX8w133juPWamHVNvNrQvEI47j-D_7hVz8r0IsVfsSdhIHoYlo-QpQfj9qoS6hlzZ7XR1gFQJUa-ovu-SaKe-ibE"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/skuData?sku=14",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"skuData"
+					],
+					"query": [
+						{
+							"key": "sku",
+							"value": "14"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add SkuData",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AbWFpbC5jb20iLCJleHAiOjE2OTg0OTMxMzAsImlhdCI6MTY5ODQ5MjgzMCwic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9BRE1JTiJ9.KZbAJxABpoSHUqVixUOuzN39k8YW2jOmwZ0VAZEET3q2lAFnuNoorfL-3fmGUfp2dLfZA5K-WQ5qfgefusDx8JbV2iRvf8Icmm3L7i0HSVUAss76_MbWWdKeR78H6BQrHcpX42f-6pLHpk9qgcQH9y9GD44DEgPENoJdrIueGGzgWhi0csNRvfa1ZqrUO2TLTH-Aec8rjl5ciAZ5HcNEaWlSCDXpWTkvS-4wCIAARidnS_ng2XK-JM_bICMcwZ_HHdEKwBUxu98cbC8nq5OToKf1gaH7op1yfOxB0DS70WLxFCKLVFXuUS2_IyL3cfNlqjAxp4JZb-KMHE5AthxEJxNw0M2JSljgsOjIqIQl6YLxhC8TXK2ucjQw6Sf60rFs4_aaqO0EiUXIKuGNj1tJ4ukqiYRVwSRBZEhebWg5mrrzyNfUknhk7AwdJpDBY5BtOSVQ7peK75g1A_O36zaXjUAgG03znZgJeCc95xqkFi8OdDx4q6CsK39kFRu4ZCUbmVl0wCZR-7fJoy0Cqdz90gaM9To9GgsybJsHFo-0bJWK2sv4DMyzZmYKddcqiNAidXIsk25ZqOLkVRMuqfGBX8w133juPWamHVNvNrQvEI47j-D_7hVz8r0IsVfsSdhIHoYlo-QpQfj9qoS6hlzZ7XR1gFQJUa-ovu-SaKe-ibE"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sku\":101,\n    \"name\":\"skuName101\",\n    \"locationId\" : \"Perimeter\",\n    \"departmentId\":\"Bakery\",\n     \"categoryId\":\"Bakery Bread\",\n      \"subCategoryId\":\"Bagels\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/skuData"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Departments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlckBtYWlsLmNvbSIsImV4cCI6MTY5ODQ5MzU3NSwiaWF0IjoxNjk4NDkzMjc1LCJzY29wZSI6IlJPTEVfVVNFUiJ9.k8Y5cfhp0htU-CPtMZ4aYW_TXNkkVJfsxmqn-_XmACl8TmIXH3m1EksjkTsisq1QUKRYheV0AqjFlmgPo0txZDNhlMSE6GHnGAEUiB1_imA9SnOv00XzAEOIJXEzeTFPgGtOjF6QV-uau6ZPzGd0oHpfwIhIzm4wJHUg13NG71IYqJzzQWkGsHhJQvIlFbwFc5PxXG3VZE7qiwjG4RJgrnakeCKc67gQHCS5CWUuQwuUe2oMahnFpF25EwFa6Z3Y-82csINia7_QtAdYcbYP4GGzPWBhHVgflq0O24vAoqp3U4rnRIqm6IJCPwSBkVW09w6EU8fDbioobDtbF_neO35_0Xrwsg9LXFWqcy2AJaiUyhHK-LG3DU3uC-DjEDYvQu_THraqmCFOniZZfqNb9CC88qvR4g8OZKhf-eqEa8wiRDFK0Hg7zMGW8-ipINXrdQQlYpo7XIYVmUSPdwPw4Fl5OF2PeaBj7YY8FxCZQVOzqTYNuyUZAOGwplnsU5JQ2QY9T2sejFWG_REDsGUSADrol5pVUaxeQWKAuS6NJ2UhR7fOVUCRxZnHgB_1kGNEEpJvvgHouSdPfnFt4bonrUjy05lNzQ0W_9RMGBow2CLYftbnABsXUnOcq9M9IX1KHHLSLE3BJLqrVbtKGFROaCghT6mhIWoJrW6xbF25jnw"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/v1/location/Perimeter/department"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlckBtYWlsLmNvbSIsImV4cCI6MTY5ODQ5MzU3NSwiaWF0IjoxNjk4NDkzMjc1LCJzY29wZSI6IlJPTEVfVVNFUiJ9.k8Y5cfhp0htU-CPtMZ4aYW_TXNkkVJfsxmqn-_XmACl8TmIXH3m1EksjkTsisq1QUKRYheV0AqjFlmgPo0txZDNhlMSE6GHnGAEUiB1_imA9SnOv00XzAEOIJXEzeTFPgGtOjF6QV-uau6ZPzGd0oHpfwIhIzm4wJHUg13NG71IYqJzzQWkGsHhJQvIlFbwFc5PxXG3VZE7qiwjG4RJgrnakeCKc67gQHCS5CWUuQwuUe2oMahnFpF25EwFa6Z3Y-82csINia7_QtAdYcbYP4GGzPWBhHVgflq0O24vAoqp3U4rnRIqm6IJCPwSBkVW09w6EU8fDbioobDtbF_neO35_0Xrwsg9LXFWqcy2AJaiUyhHK-LG3DU3uC-DjEDYvQu_THraqmCFOniZZfqNb9CC88qvR4g8OZKhf-eqEa8wiRDFK0Hg7zMGW8-ipINXrdQQlYpo7XIYVmUSPdwPw4Fl5OF2PeaBj7YY8FxCZQVOzqTYNuyUZAOGwplnsU5JQ2QY9T2sejFWG_REDsGUSADrol5pVUaxeQWKAuS6NJ2UhR7fOVUCRxZnHgB_1kGNEEpJvvgHouSdPfnFt4bonrUjy05lNzQ0W_9RMGBow2CLYftbnABsXUnOcq9M9IX1KHHLSLE3BJLqrVbtKGFROaCghT6mhIWoJrW6xbF25jnw"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/v1/location/Perimeter/department/Bakery/category"
+			},
+			"response": []
+		},
+		{
+			"name": "Get SubCategories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlckBtYWlsLmNvbSIsImV4cCI6MTY5ODQ5MzU3NSwiaWF0IjoxNjk4NDkzMjc1LCJzY29wZSI6IlJPTEVfVVNFUiJ9.k8Y5cfhp0htU-CPtMZ4aYW_TXNkkVJfsxmqn-_XmACl8TmIXH3m1EksjkTsisq1QUKRYheV0AqjFlmgPo0txZDNhlMSE6GHnGAEUiB1_imA9SnOv00XzAEOIJXEzeTFPgGtOjF6QV-uau6ZPzGd0oHpfwIhIzm4wJHUg13NG71IYqJzzQWkGsHhJQvIlFbwFc5PxXG3VZE7qiwjG4RJgrnakeCKc67gQHCS5CWUuQwuUe2oMahnFpF25EwFa6Z3Y-82csINia7_QtAdYcbYP4GGzPWBhHVgflq0O24vAoqp3U4rnRIqm6IJCPwSBkVW09w6EU8fDbioobDtbF_neO35_0Xrwsg9LXFWqcy2AJaiUyhHK-LG3DU3uC-DjEDYvQu_THraqmCFOniZZfqNb9CC88qvR4g8OZKhf-eqEa8wiRDFK0Hg7zMGW8-ipINXrdQQlYpo7XIYVmUSPdwPw4Fl5OF2PeaBj7YY8FxCZQVOzqTYNuyUZAOGwplnsU5JQ2QY9T2sejFWG_REDsGUSADrol5pVUaxeQWKAuS6NJ2UhR7fOVUCRxZnHgB_1kGNEEpJvvgHouSdPfnFt4bonrUjy05lNzQ0W_9RMGBow2CLYftbnABsXUnOcq9M9IX1KHHLSLE3BJLqrVbtKGFROaCghT6mhIWoJrW6xbF25jnw"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/v1/location/Perimeter/department/Bakery/category/Bakery Bread/subcategory"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Metadata",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlckBtYWlsLmNvbSIsImV4cCI6MTY5ODQ5MzU3NSwiaWF0IjoxNjk4NDkzMjc1LCJzY29wZSI6IlJPTEVfVVNFUiJ9.k8Y5cfhp0htU-CPtMZ4aYW_TXNkkVJfsxmqn-_XmACl8TmIXH3m1EksjkTsisq1QUKRYheV0AqjFlmgPo0txZDNhlMSE6GHnGAEUiB1_imA9SnOv00XzAEOIJXEzeTFPgGtOjF6QV-uau6ZPzGd0oHpfwIhIzm4wJHUg13NG71IYqJzzQWkGsHhJQvIlFbwFc5PxXG3VZE7qiwjG4RJgrnakeCKc67gQHCS5CWUuQwuUe2oMahnFpF25EwFa6Z3Y-82csINia7_QtAdYcbYP4GGzPWBhHVgflq0O24vAoqp3U4rnRIqm6IJCPwSBkVW09w6EU8fDbioobDtbF_neO35_0Xrwsg9LXFWqcy2AJaiUyhHK-LG3DU3uC-DjEDYvQu_THraqmCFOniZZfqNb9CC88qvR4g8OZKhf-eqEa8wiRDFK0Hg7zMGW8-ipINXrdQQlYpo7XIYVmUSPdwPw4Fl5OF2PeaBj7YY8FxCZQVOzqTYNuyUZAOGwplnsU5JQ2QY9T2sejFWG_REDsGUSADrol5pVUaxeQWKAuS6NJ2UhR7fOVUCRxZnHgB_1kGNEEpJvvgHouSdPfnFt4bonrUjy05lNzQ0W_9RMGBow2CLYftbnABsXUnOcq9M9IX1KHHLSLE3BJLqrVbtKGFROaCghT6mhIWoJrW6xbF25jnw"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/v1/location/Perimeter/department/Bakery/category/Bakery Bread/subcategory/Bagels"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Metadata",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AbWFpbC5jb20iLCJleHAiOjE2OTg0OTQ0NzksImlhdCI6MTY5ODQ5NDE3OSwic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9BRE1JTiJ9.gp5E5pC7aZzHiKtVYRRgpwe5daf7UqS7HFrWUsOAcdIQwXOGnyGL9jl-7dJ72c0Ar36IN-uwu37aO2bOaStbrVB2fF94SNdDDYwuF-5Kvv6AYwVr72b2Zt1Nia8A06Mi8KAgwKUK6n41QqvUMMF-VcMhBRQnhs1LnCDcvqB15M_huwb0ehYFDGOQoILwx8waFMg0tNzQwECCiDHNpg8vjv6bKwL5YuQcs59GQtkZGrS3mHxu6rewGR0W7NqvdNhUreMa6bJ9bLeQhb_Sy_GcSslNXVjdd78LCGQrYJ8TrbB-d6KBQbQA3uniHWn0NDl91L8s3MFOeYAgQ8FuoO2DNY335eK5OMOVY6CDJr9j6M0UR62G7EHlqzkD6TGgCz2wb4jIcPF9FRvCQKzHffqzrvQ9UbxiRzeBHyLadM_iqvnmuWwhfPoR1lgFXXY-30sVdP9CD13iYm8dVrq7_q_oyHlO-kwC8lY9Mx2soPnmml7A9Yjaz6Glngx4MMPrGXHdg6lu0yCym81AyfVANmZfeNbOsO81DOEcS9XI0QzcI4PeAo1B7wuVIjCU1Z74H_VmEA1fA_rgD1XLexdZzt467LfhEG9XcfRmvx1MdG1W5v81DXofFR9UCtE5DNID96QIe186m3fDszGF0zYMU_jxDkmgpe5cKZZHxBonUKdpGtU"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "localhost:8080/api/v1/location/Perimeter/department/Bakery/category/Bakery Bread/subcategory/BagelsNew"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Metadata",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AbWFpbC5jb20iLCJleHAiOjE2OTg0OTQ0NzksImlhdCI6MTY5ODQ5NDE3OSwic2NvcGUiOiJST0xFX1VTRVIgUk9MRV9BRE1JTiJ9.gp5E5pC7aZzHiKtVYRRgpwe5daf7UqS7HFrWUsOAcdIQwXOGnyGL9jl-7dJ72c0Ar36IN-uwu37aO2bOaStbrVB2fF94SNdDDYwuF-5Kvv6AYwVr72b2Zt1Nia8A06Mi8KAgwKUK6n41QqvUMMF-VcMhBRQnhs1LnCDcvqB15M_huwb0ehYFDGOQoILwx8waFMg0tNzQwECCiDHNpg8vjv6bKwL5YuQcs59GQtkZGrS3mHxu6rewGR0W7NqvdNhUreMa6bJ9bLeQhb_Sy_GcSslNXVjdd78LCGQrYJ8TrbB-d6KBQbQA3uniHWn0NDl91L8s3MFOeYAgQ8FuoO2DNY335eK5OMOVY6CDJr9j6M0UR62G7EHlqzkD6TGgCz2wb4jIcPF9FRvCQKzHffqzrvQ9UbxiRzeBHyLadM_iqvnmuWwhfPoR1lgFXXY-30sVdP9CD13iYm8dVrq7_q_oyHlO-kwC8lY9Mx2soPnmml7A9Yjaz6Glngx4MMPrGXHdg6lu0yCym81AyfVANmZfeNbOsO81DOEcS9XI0QzcI4PeAo1B7wuVIjCU1Z74H_VmEA1fA_rgD1XLexdZzt467LfhEG9XcfRmvx1MdG1W5v81DXofFR9UCtE5DNID96QIe186m3fDszGF0zYMU_jxDkmgpe5cKZZHxBonUKdpGtU"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8080/api/v1/location/Perimeter/department/Bakery/category/Bakery Bread/subcategory/BagelsNew"
+			},
+			"response": []
+		}
+	]
+}
